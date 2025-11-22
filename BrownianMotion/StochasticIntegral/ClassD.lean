@@ -93,7 +93,7 @@ end PartialOrder
 
 section LinearOrder
 
-variable [LinearOrder ι] {𝓕 : Filtration ι mΩ}
+variable [h_lin: LinearOrder ι] {𝓕 : Filtration ι mΩ}
 
 lemma isStable_hasLocallyIntegrableSup [OrderBot ι] [TopologicalSpace ι] [OrderTopology ι] :
     IsStable 𝓕 (HasLocallyIntegrableSup (E := E) · 𝓕 P) := by
@@ -120,10 +120,6 @@ lemma ClassDL.locally_classD [OrderBot ι] [TopologicalSpace ι] [OrderTopology 
     Locally (ClassD · 𝓕 P) 𝓕 X P := by
   sorry
 
-lemma locally_classD_of_locally_classDL [OrderBot ι] [TopologicalSpace ι] [OrderTopology ι]
-    (hX : Locally (ClassDL · 𝓕 P) 𝓕 X P) (h𝓕 : 𝓕.IsRightContinuous) :
-    Locally (ClassD · 𝓕 P) 𝓕 X P := by
-  sorry
 
 -- TODO: The assumptions should be refined with those of Début theorem.
 lemma isLocalizingSequence_hittingAfter_Ici {ι : Type*} [PartialOrder ι] [TopologicalSpace ι]
@@ -153,5 +149,16 @@ lemma hasLocallyIntegrableSup_of_locally_classDL [TopologicalSpace ι] [OrderTop
   sorry
 
 end LinearOrder
+
+
+lemma locally_classD_of_locally_classDL [ConditionallyCompleteLinearOrderBot ι] [TopologicalSpace ι] [OrderTopology ι] [NoMaxOrder ι] [SecondCountableTopology ι] [IsFiniteMeasure P] [DenselyOrdered ι] {𝓕 : Filtration ι mΩ}
+    (hX : Locally (ClassDL · 𝓕 P) 𝓕 X P) (h𝓕 : 𝓕.IsRightContinuous) :
+    Locally (ClassD · 𝓕 P) 𝓕 X P := by
+  -- apply ProbabilityTheory.ClassDL.locally_classD
+  have stable := ProbabilityTheory.isStable_classD (ι := ι) (E := E) (Ω := Ω) (𝓕 := 𝓕) (P := P)
+  apply ProbabilityTheory.locally_induction h𝓕 (fun Y ↦ ProbabilityTheory.ClassDL.locally_classD (X := Y) (𝓕 := 𝓕)) stable hX
+
+#print sorries locally_classD_of_locally_classDL
+
 
 end ProbabilityTheory
