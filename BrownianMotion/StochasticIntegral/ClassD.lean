@@ -1,4 +1,14 @@
 /-
+This file was edited by Aristotle.
+
+Lean Toolchain version: leanprover/lean4:v4.20.0-rc5
+Mathlib version: d62eab0cc36ea522904895389c301cf8d844fd69 (May 9, 2025)
+
+Aristotle encountered an error processing this file. The team has been notified.
+
+-/
+
+/-
 Copyright (c) 2025 Rémy Degenne. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Rémy Degenne
@@ -123,6 +133,9 @@ lemma ClassDL.locally_classD [OrderBot ι] [TopologicalSpace ι] [OrderTopology 
 lemma locally_classD_of_locally_classDL [OrderBot ι] [TopologicalSpace ι] [OrderTopology ι]
     (hX : Locally (ClassDL · 𝓕 P) 𝓕 X P) (h𝓕 : 𝓕.IsRightContinuous) :
     Locally (ClassD · 𝓕 P) 𝓕 X P := by
+
+  apply ProbabilityTheory.locally_induction
+
   sorry
 
 -- TODO: The assumptions should be refined with those of Début theorem.
