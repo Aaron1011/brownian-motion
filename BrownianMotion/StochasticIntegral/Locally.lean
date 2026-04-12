@@ -330,6 +330,7 @@ lemma isPreLocalizingSequence_of_isLocalizingSequence
 
 variable [DenselyOrdered ι] [NoMaxOrder ι] [Zero E]
 
+omit [FirstCountableTopology ι] in
 /-- A stable property holding locally is idempotent. -/
 lemma locally_locally
     (h𝓕 : IsRightContinuous 𝓕) (hp : IsStable 𝓕 p) :
@@ -352,6 +353,7 @@ lemma locally_locally
       rfl
   · exact ⟨hL.localSeq, hL.IsLocalizingSequence, fun n ↦ locally_of_prop <| hL.stoppedProcess n⟩
 
+omit [FirstCountableTopology ι] in
 /-- If `p` implies `q` locally, then `p` locally implies `q` locally. -/
 lemma locally_induction (h𝓕 : IsRightContinuous 𝓕)
     (hpq : ∀ Y, p Y → Locally q 𝓕 Y P) (hq : IsStable 𝓕 q) (hpX : Locally p 𝓕 X P) :
